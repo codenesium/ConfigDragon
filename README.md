@@ -4,7 +4,11 @@ Config Dragon is a command line utility you can use to set up configuration file
 It's similar to Slow Cheetah but I intend to add more complex feature that Slow Cheetah doesn't support.
 
 #### Config Dragon will auto-detect your repository root for mercurial and GIT repositories if you have Source Tree installed.
+
 #### For other installs you will have to set RepositoryRootDirectory
+
+#### Currently only application settions and connection strings are supported.
+
 
 ### Steps to use
 
