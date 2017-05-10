@@ -15,7 +15,7 @@ There will be a ConfigDragon.bat and a ConfigDragon.json added to your project.
 
 The default template looks like this.
 
-`{
+```javascript{
   "RepositoryRootDirectory": "",
   "ConfigActions": [
     {
@@ -81,11 +81,11 @@ The default template looks like this.
       }
     }
   ]
-}`
+}```
 
 Set up a configuration package that contains your connection string and app setting changes.
 
-`{
+```javascript{
       "Name": "Development",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
@@ -93,12 +93,12 @@ Set up a configuration package that contains your connection string and app sett
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
       }
-}`
+}```
 
 
 #### Set up a config item.
 
-`{
+```javascript{
   "Name": "Dev",
   "ConfigItems": [
 	{
@@ -108,7 +108,7 @@ Set up a configuration package that contains your connection string and app sett
 	  "PackageName": "Development"
 	}
   ]
-}`
+}```
 
 
 To run the change call "ConfigDragon.bat dev" to apply the changes to your project. That's it!
