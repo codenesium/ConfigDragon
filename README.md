@@ -24,8 +24,8 @@ The default template looks like this.
       "ConfigItems": [
         {
           "Name": "YOUR_PROJECT_NAME",
-          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "RelativeFilename": "app.config",
+          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "TargetFilename": "app.config",
           "PackageName": "Development"
         }
       ]
@@ -35,8 +35,8 @@ The default template looks like this.
       "ConfigItems": [
         {
           "Name": "YOUR_PROJECT_NAME",
-          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "RelativeFilename": "app.config",
+          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "TargetFilename": "app.config",
           "PackageName": "Test"
         }
       ]
@@ -46,8 +46,8 @@ The default template looks like this.
       "ConfigItems": [
         {
           "Name": "YOUR_PROJECT_NAME",
-          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "RelativeFilename": "app.config",
+          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "TargetFilename": "app.config",
           "PackageName": "Production"
         }
       ]
@@ -109,8 +109,8 @@ Set up a configuration package that contains your connection string and app sett
   "ConfigItems": [
 	{
 	  "Name": "YOUR_PROJECT_NAME",
-	  "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-	  "RelativeFilename": "app.config",
+	  "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+	  "TargetFilename": "app.config",
 	  "PackageName": "Development"
 	}
   ]

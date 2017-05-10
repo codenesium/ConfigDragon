@@ -6,8 +6,8 @@
       "ConfigItems": [
         {
           "Name": "YOUR_PROJECT_NAME",
-          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "RelativeFilename": "app.config",
+          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "TargetFilename": "app.config",
           "PackageName": "Development"
         }
       ]
@@ -17,8 +17,8 @@
       "ConfigItems": [
         {
           "Name": "YOUR_PROJECT_NAME",
-          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "RelativeFilename": "app.config",
+          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "TargetFilename": "app.config",
           "PackageName": "Test"
         }
       ]
@@ -28,8 +28,8 @@
       "ConfigItems": [
         {
           "Name": "YOUR_PROJECT_NAME",
-          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "RelativeFilename": "app.config",
+          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "TargetFilename": "app.config",
           "PackageName": "Production"
         }
       ]

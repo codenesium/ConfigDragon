@@ -68,7 +68,7 @@
                           Environment.Exit(-1);
                       }
 
-                      configManager.ProcessConfig(Path.Combine(configContainer.RepositoryRootDirectory, configItem.Directory), configItem.RelativeFilename, package);
+                      configManager.ProcessConfig(Path.Combine(configContainer.RepositoryRootDirectory, configItem.RelativeDirectory), configItem.TargetFilename, package);
                   }
               })
               .WithNotParsed(errors => { });
