@@ -1,0 +1,67 @@
+﻿{
+  "RepositoryRootDirectory": "",
+  "ConfigActions": [
+    {
+      "Name": "Dev",
+      "ConfigItems": [
+        {
+          "Name": "YOUR_PROJECT_NAME",
+          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "RelativeFilename": "app.config",
+          "PackageName": "Development"
+        }
+      ]
+    },
+    {
+      "Name": "Test",
+      "ConfigItems": [
+        {
+          "Name": "YOUR_PROJECT_NAME",
+          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "RelativeFilename": "app.config",
+          "PackageName": "Test"
+        }
+      ]
+    },
+    {
+      "Name": "Prod",
+      "ConfigItems": [
+        {
+          "Name": "YOUR_PROJECT_NAME",
+          "Directory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
+          "RelativeFilename": "app.config",
+          "PackageName": "Production"
+        }
+      ]
+    }
+  ],
+  "ConfigPackages": [
+    {
+      "Name": "Development",
+      "AppSettings": {
+        "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
+      },
+      "ConnectionStrings": {
+        "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      }
+    },
+    {
+      "Name": "Test",
+      "AppSettings": {
+        "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
+      },
+      "ConnectionStrings": {
+        "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      }
+    },
+    {
+      "Name": "Production",
+      "AppSettings": {
+        "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
+      },
+      "ConnectionStrings": {
+        "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      }
+    }
+  ]
+}
