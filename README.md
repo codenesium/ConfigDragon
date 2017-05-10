@@ -7,7 +7,7 @@ It's similar to Slow Cheetah but I intend to add more complex feature that Slow 
 
 #### For other installs you will have to set RepositoryRootDirectory
 
-#### Currently only application settions and connection strings are supported.
+#### Currently modification of application settings and connection strings are supported.
 
 
 ### Steps to use
