@@ -15,6 +15,8 @@ It's similar to Slow Cheetah but I intend to add more complex feature that Slow 
 
 #### Install the nuget package
 
+Install-Package Codenesium.ConfigDragon
+
 There will be a ConfigDragon.bat and a ConfigDragon.json added to your project.
 
 The default template looks like this.
