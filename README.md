@@ -7,7 +7,7 @@ It's similar to Slow Cheetah but I intend to add more complex feature that Slow 
 
 #### For other installs you will have to set RepositoryRootDirectory
 
-#### Currently modification of application settings and connection strings are supported.
+#### Currently modification of application settings, connection strings, xml in visual studio project files are supported
 
 
 ### Steps to use
@@ -29,21 +29,10 @@ The default template looks like this.
       "Name": "Dev",
       "ConfigItems": [
         {
-          "Name": "YOUR_PROJECT_NAME",
+          "Name": "AppConfigChange",
           "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
           "TargetFilename": "app.config",
-          "PackageName": "Development"
-        }
-      ]
-    },
-    {
-      "Name": "Test",
-      "ConfigItems": [
-        {
-          "Name": "YOUR_PROJECT_NAME",
-          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "TargetFilename": "app.config",
-          "PackageName": "Test"
+          "PackageName": "DevelopmentPackage"
         }
       ]
     },
@@ -51,40 +40,37 @@ The default template looks like this.
       "Name": "Prod",
       "ConfigItems": [
         {
-          "Name": "YOUR_PROJECT_NAME",
+          "Name": "AppConfigChange",
           "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
           "TargetFilename": "app.config",
-          "PackageName": "Production"
+          "PackageName": "ProductionPackage"
         }
       ]
     }
   ],
   "ConfigPackages": [
     {
-      "Name": "Development",
+      "Name": "DevelopmentPackage",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      },
+      "VisualStudioProjectSettings": {
+        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
       }
     },
     {
-      "Name": "Test",
+      "Name": "ProductionPackage",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
-      }
-    },
-    {
-      "Name": "Production",
-      "AppSettings": {
-        "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
-      "ConnectionStrings": {
-        "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      "VisualStudioProjectSettings": {
+        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
       }
     }
   ]
@@ -94,16 +80,18 @@ The default template looks like this.
 Set up a configuration package that contains your connection string and app setting changes.
 
 ```javascript
-{
-      "Name": "Development",
+ {
+      "Name": "DevelopmentPackage",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      },
+      "VisualStudioProjectSettings": {
+        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
       }
-
-}
+    }
 ```
 
 
@@ -117,7 +105,7 @@ Set up a configuration package that contains your connection string and app sett
 	  "Name": "YOUR_PROJECT_NAME",
 	  "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
 	  "TargetFilename": "app.config",
-	  "PackageName": "Development"
+	  "PackageName": "DevelopmentPackage"
 	}
   ]
 }
@@ -128,3 +116,6 @@ To run the change call "ConfigDragon.bat dev" to apply the changes to your proje
 
 You can have multiple config items call the same package. A scenario where that is needed is a solution with
 multiple projects that need the same config change. 
+
+The Visual Studio project modification uses XPAth 1.0 to select the item you want to edit. Note that ns: is required to 
+namespace the selectors correctly. 
