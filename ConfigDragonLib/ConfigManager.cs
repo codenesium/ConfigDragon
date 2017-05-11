@@ -28,15 +28,21 @@
         {
             var appSettingsManager = new AppSettingsManager();
             var connectionStringManager = new ConnectionStringManager();
+            var visualStudioProjectFileManagerManager = new VisualStudioProjectFileManager();
 
             foreach (var key in config.AppSettings.Keys)
             {
-                appSettingsManager.SetAppSetting(Path.Combine(configFileDirectory, relativeFileName), key, config.AppSettings[key]);
+                appSettingsManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.AppSettings[key]);
             }
 
             foreach (var key in config.ConnectionStrings.Keys)
             {
-                connectionStringManager.SetConnectionString(Path.Combine(configFileDirectory, relativeFileName), key, config.ConnectionStrings[key]);
+                connectionStringManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.ConnectionStrings[key]);
+            }
+
+            foreach (var key in config.VisualStudioProjectSettings.Keys)
+            {
+                visualStudioProjectFileManagerManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.VisualStudioProjectSettings[key]);
             }
         }
     }

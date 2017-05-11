@@ -1,0 +1,24 @@
+﻿{
+  "RepositoryRootDirectory": "C:\\Users\\Administrator\\Documents\\Mercurial\\Nebula\\NebulaAPI",
+  "ConfigActions": [
+    {
+      "Name": "Dev",
+      "ConfigItems": [
+        {
+          "Name": "nebula",
+          "RelativeDirectory": "",
+          "TargetFilename": "nebulaapi.csproj",
+          "PackageName": "Development"
+        }
+      ]
+    }
+  ],
+  "ConfigPackages": [
+    {
+      "Name": "Development",
+      "VisualStudioProjectSettings": {
+        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:8000"
+      }
+    }
+  ]
+}

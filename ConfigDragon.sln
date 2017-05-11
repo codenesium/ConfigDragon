@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragon", "ConfigDragon.csproj", "{6597D750-D6A2-42D8-B2DB-BE3B2668845A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragon", "ConfigDragon\ConfigDragon.csproj", "{6597D750-D6A2-42D8-B2DB-BE3B2668845A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragonLib", "..\ConsoleDragonLib\ConfigDragonLib.csproj", "{2D25DB1C-B29A-4C25-89A8-BFF6982E02DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragonLib", "ConfigDragonLib\ConfigDragonLib.csproj", "{2D25DB1C-B29A-4C25-89A8-BFF6982E02DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

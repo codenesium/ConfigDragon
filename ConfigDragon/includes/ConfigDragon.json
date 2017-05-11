@@ -5,21 +5,10 @@
       "Name": "Dev",
       "ConfigItems": [
         {
-          "Name": "YOUR_PROJECT_NAME",
+          "Name": "AppConfigChange",
           "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
           "TargetFilename": "app.config",
-          "PackageName": "Development"
-        }
-      ]
-    },
-    {
-      "Name": "Test",
-      "ConfigItems": [
-        {
-          "Name": "YOUR_PROJECT_NAME",
-          "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
-          "TargetFilename": "app.config",
-          "PackageName": "Test"
+          "PackageName": "DevelopmentPackage"
         }
       ]
     },
@@ -27,40 +16,37 @@
       "Name": "Prod",
       "ConfigItems": [
         {
-          "Name": "YOUR_PROJECT_NAME",
+          "Name": "AppConfigChange",
           "RelativeDirectory": "PATH_RELATIVE_TO_RepositoryRootDirectory",
           "TargetFilename": "app.config",
-          "PackageName": "Production"
+          "PackageName": "ProductionPackage"
         }
       ]
     }
   ],
   "ConfigPackages": [
     {
-      "Name": "Development",
+      "Name": "DevelopmentPackage",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      },
+      "VisualStudioProjectSettings": {
+        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
       }
     },
     {
-      "Name": "Test",
+      "Name": "ProductionPackage",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
-      }
-    },
-    {
-      "Name": "Production",
-      "AppSettings": {
-        "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
       },
-      "ConnectionStrings": {
-        "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
+      "VisualStudioProjectSettings": {
+        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
       }
     }
   ]

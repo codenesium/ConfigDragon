@@ -14,11 +14,11 @@
         /// <param name="filename">The target file to be modified</param>
         /// <param name="key">The app setting key</param>
         /// <param name="value">The app setting new value</param>
-        public void SetAppSetting(string filename, string key, string value)
+        public void Process(string filename, string key, string value)
         {
             if (!File.Exists(filename))
             {
-                throw new FileNotFoundException($"The configuration file {filename} was not found!");
+                throw new FileNotFoundException($"The file {filename} was not found!");
             }
 
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();

@@ -66,12 +66,15 @@
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="ConfigDragon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="includes\ConfigDragon.bat" />
     <None Include="packages.config" />
     <None Include="includes\ConfigDragon.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleDragonLib\ConfigDragonLib.csproj">
+    <ProjectReference Include="..\ConfigDragonLib\ConfigDragonLib.csproj">
       <Project>{2d25db1c-b29a-4c25-89a8-bff6982e02df}</Project>
       <Name>ConfigDragonLib</Name>
     </ProjectReference>

@@ -14,11 +14,11 @@
         /// <param name="filename">Target filename to process</param>
         /// <param name="key">The connection string key to modify</param>
         /// <param name="value">The value to replace the existing value with</param>
-        public void SetConnectionString(string filename, string key, string value)
+        public void Process(string filename, string key, string value)
         {
             if (!File.Exists(filename))
             {
-                throw new FileNotFoundException($"The configuration file {filename} was not found!");
+                throw new FileNotFoundException($"The file {filename} was not found!");
             }
 
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
