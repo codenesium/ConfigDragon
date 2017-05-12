@@ -1,13 +1,20 @@
 ﻿namespace Codenesium.ConfigDragonLib
 {
+    using System;
     using System.Configuration;
     using System.IO;
+    using Logging;
 
     /// <summary>
     /// Class that handles application settings in .NET configuration files
     /// </summary>
     public class AppSettingsManager
     {
+        /// <summary>
+        /// Gets or sets the logging event handler
+        /// </summary>
+        public EventHandler<LogEventArgs> Log { get; set; }
+
         /// <summary>
         /// Will create a setting if it does not exist
         /// </summary>
@@ -18,7 +25,8 @@
         {
             if (!File.Exists(filename))
             {
-                throw new FileNotFoundException($"The file {filename} was not found!");
+                this?.Log(this, new LogEventArgs(EnumLogLevel.ERROR, $"The file { filename } was not found!"));
+                return;
             }
 
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
@@ -29,10 +37,11 @@
                 config.AppSettings.Settings.Remove(key);
                 config.AppSettings.Settings.Add(key, value);
                 config.Save();
+                this?.Log(this, new LogEventArgs(EnumLogLevel.INFO, $"Key {key} processed"));
             }
             else
             {
-                //log this some how
+                this?.Log(this, new LogEventArgs(EnumLogLevel.WARN, $"Key {key} not found"));
             }
         }
     }

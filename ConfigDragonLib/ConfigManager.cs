@@ -1,6 +1,8 @@
 ﻿namespace Codenesium.ConfigDragonLib
 {
+    using System;
     using System.IO;
+    using Logging;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -8,6 +10,11 @@
     /// </summary>
     public class ConfigManager
     {
+        /// <summary>
+        /// Gets or sets the logging event handler
+        /// </summary>
+        public EventHandler<LogEventArgs> Log { get; set; }
+
         /// <summary>
         /// Loads the config container from the supplied file
         /// </summary>
@@ -23,12 +30,17 @@
         /// Executes the selected config
         /// </summary>
         /// <param name="configFileDirectory">The path the config file was loaded from</param>
+        /// <param name="relativeFileName">The path relative to the config file to modify</param>
         /// <param name="config">The selected config to run</param>
-        public void ProcessConfig(string configFileDirectory,string relativeFileName, ConfigPackage config)
+        public void ProcessConfig(string configFileDirectory, string relativeFileName, ConfigPackage config)
         {
             var appSettingsManager = new AppSettingsManager();
             var connectionStringManager = new ConnectionStringManager();
             var visualStudioProjectFileManagerManager = new VisualStudioProjectFileManager();
+
+            appSettingsManager.Log += this.Log;
+            connectionStringManager.Log += this.Log;
+            visualStudioProjectFileManagerManager.Log += this.Log;
 
             foreach (var key in config.AppSettings.Keys)
             {
@@ -44,6 +56,6 @@
             {
                 visualStudioProjectFileManagerManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.VisualStudioProjectSettings[key]);
             }
-        }
+        }      
     }
 }

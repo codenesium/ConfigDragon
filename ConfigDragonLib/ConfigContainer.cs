@@ -13,9 +13,19 @@
         public string RepositoryRootDirectory { get; set; }
 
         /// <summary>
+        /// Gets or sets the HgExecutablePath. Hg.exe
+        /// </summary>
+        public string HgExecutablePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the GitExecutablePath. 'GIT.exe'
+        /// </summary>
+        public string GitExecutablePath { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of config actions
         /// </summary>
-        public List<ConfigAction> ConfigActions{ get; set; } = new List<ConfigAction>();
+        public List<ConfigAction> ConfigActions { get; set; } = new List<ConfigAction>();
 
         /// <summary>
         /// Gets or sets the list of config packages

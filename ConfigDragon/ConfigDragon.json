@@ -1,4 +1,6 @@
 ﻿{
+  "HgExecutablePath": "%USERPROFILE\\AppData\\Local\\Atlassian\\SourceTree\\hg_local\\hg.exe",
+  "GitExecutablePath": "%USERPROFILE%\\AppData\\Local\\Atlassian\\SourceTree\\git_local\\bin\\git.exe",
   "RepositoryRootDirectory": "C:\\Users\\Administrator\\Documents\\Mercurial\\Nebula\\NebulaAPI",
   "ConfigActions": [
     {

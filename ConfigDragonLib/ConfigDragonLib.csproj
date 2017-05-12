@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="Managers\AppSettingsManager.cs" />
     <Compile Include="ConfigAction.cs" />
     <Compile Include="ConfigItem.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Managers\ConnectionStringManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\VisualStudioProjectFileManager.cs" />
+    <Compile Include="SourceControlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

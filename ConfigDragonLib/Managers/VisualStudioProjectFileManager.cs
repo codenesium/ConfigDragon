@@ -1,43 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-
-namespace Codenesium.ConfigDragonLib
+﻿namespace Codenesium.ConfigDragonLib
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+    using Logging;
+
+    /// <summary>
+    /// Handles making changed to Visual Studio csproj files.
+    /// </summary>
     public class VisualStudioProjectFileManager
     {
+        /// <summary>
+        /// Gets or sets the logging event handler
+        /// </summary>
+        public EventHandler<LogEventArgs> Log { get; set; }
+
+        /// <summary>
+        /// Processes the specified file using the XPath selector and replaces the found element with the supplied value/
+        /// </summary>
+        /// <param name="filename">file to modify</param>
+        /// <param name="selector">XPath selector to use</param>
+        /// <param name="value">Value to replace with</param>
         public void Process(string filename, string selector, string value)
         {
             if (!File.Exists(filename))
             {
-                throw new FileNotFoundException($"The file {filename} was not found!");
+                this?.Log(this, new LogEventArgs(EnumLogLevel.ERROR, $"The file { filename } was not found!"));
+                return;
             }
 
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(filename);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
 
-            //It is required to add a namespace because the project node in a project file
-            // has the "http://schemas.microsoft.com/developer/msbuild/2003" namespace. Without it
-            //XPath does not work. There is a work around for XPAth 2.0 but it's not supported by .NET
+            /* It is required to add a namespace because the project node in a project file
+              has the "http://schemas.microsoft.com/developer/msbuild/2003" namespace. Without it
+              XPath does not work. There is a work around for XPAth 2.0 but it's not supported by .NET
+            */
 
-            var msManager = new XmlNamespaceManager(xDoc.NameTable);
-            msManager.AddNamespace("ns", "http://schemas.microsoft.com/developer/msbuild/2003");
+            var namespaceManager = new XmlNamespaceManager(doc.NameTable);
+            namespaceManager.AddNamespace("ns", "http://schemas.microsoft.com/developer/msbuild/2003");
 
-            XmlNode root = xDoc.DocumentElement;
+            XmlNode root = doc.DocumentElement;
 
-            var node = root.SelectSingleNode(selector, msManager);
-            if(node == null)
+            var node = root.SelectSingleNode(selector, namespaceManager);
+
+            if (node != null)
             {
-                throw new NullReferenceException($"The selector {selector} did not return any nodes");
+                node.InnerText = value;
+                doc.Save(filename);
+                this?.Log(this, new LogEventArgs(EnumLogLevel.INFO, $"Selector {selector} processed"));
             }
-
-            node.InnerText = value;
-            xDoc.Save(filename);
-
+            else
+            {
+                this?.Log(this, new LogEventArgs(EnumLogLevel.WARN, $"The selector {selector} did not return any nodes"));
+            }
         }
     }
 }
