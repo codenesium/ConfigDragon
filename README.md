@@ -3,7 +3,7 @@
 Config Dragon is a command line utility you can use to set up configuration files in .NET solutions. 
 It's similar to Slow Cheetah but I intend to add more complex feature that Slow Cheetah doesn't support.
 
-#### Config Dragon will auto-detect your repository root for mercurial and GIT repositories if you have Source Tree installed.
+#### Config Dragon will auto-detect your repository root for mercurial and GIT repositories if you have Source Tree installed. If you have another source control system you can set the location of the hg.exe or git.exe in the DragonConfig.json
 
 #### For other installs you will have to set RepositoryRootDirectory
 
@@ -24,6 +24,8 @@ The default template looks like this.
 ```javascript
 {
   "RepositoryRootDirectory": "",
+  "HgExecutablePath": "%USERPROFILE\\AppData\\Local\\Atlassian\\SourceTree\\hg_local\\hg.exe",
+  "GitExecutablePath": "%USERPROFILE%\\AppData\\Local\\Atlassian\\SourceTree\\git_local\\bin\\git.exe",
   "ConfigActions": [
     {
       "Name": "Dev",
