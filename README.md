@@ -24,7 +24,7 @@ The default template looks like this.
 ```javascript
 {
   "RepositoryRootDirectory": "",
-  "HgExecutablePath": "%USERPROFILE\\AppData\\Local\\Atlassian\\SourceTree\\hg_local\\hg.exe",
+  "HgExecutablePath": "%USERPROFILE%\\AppData\\Local\\Atlassian\\SourceTree\\hg_local\\hg.exe",
   "GitExecutablePath": "%USERPROFILE%\\AppData\\Local\\Atlassian\\SourceTree\\git_local\\bin\\git.exe",
   "ConfigActions": [
     {

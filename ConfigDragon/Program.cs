@@ -49,6 +49,12 @@
                   if (string.IsNullOrWhiteSpace(configContainer.RepositoryRootDirectory))
                   {
                       configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, "RepositoryRootDirectory was not set. Attempting to determine if we're in a repository"));
+
+                      configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"Config HgExecutablePath={configContainer.HgExecutablePath},Expanded={Environment.ExpandEnvironmentVariables(configContainer.HgExecutablePath)}"));
+
+                      configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"Config GitExecutablePath={configContainer.GitExecutablePath},Expanded={Environment.ExpandEnvironmentVariables(configContainer.GitExecutablePath)}"));
+
+
                       var hgRepositoryRoot = SourceControlHelper.GetHGRepositoryRootPath(Environment.ExpandEnvironmentVariables(configContainer.HgExecutablePath));
                       var gitRepositoryRoot = SourceControlHelper.GetGitRepositoryRootPath(Environment.ExpandEnvironmentVariables(configContainer.GitExecutablePath));
 
@@ -59,7 +65,7 @@
                       }
                       else if (!string.IsNullOrWhiteSpace(gitRepositoryRoot))
                       {
-                          configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"We are in a Mercurial repository. Root = {gitRepositoryRoot}."));
+                          configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"We are in a Git repository. Root = {gitRepositoryRoot}."));
                           configContainer.RepositoryRootDirectory = gitRepositoryRoot;
                       }
                       else
