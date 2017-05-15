@@ -6,12 +6,18 @@
     using CommandLine;
     using ConfigDragonLib;
     using ConfigDragonLib.Logging;
+    using NLog;
 
     /// <summary>
     /// Main program
     /// </summary>
     public class Program
     {
+        /// <summary>
+        /// NLog logging class
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Program entry points
         /// </summary>
@@ -21,19 +27,50 @@
             var result = Parser.Default.ParseArguments<Options>(args)
               .WithParsed(options =>
               {
-                  var configManager = new ConfigManager();
-
-                  configManager.Log += (sender, e) =>
+                  if (!string.IsNullOrWhiteSpace(options.LogLevel))
                   {
-                      if (options.DisplayLog || e.LogLevel == EnumLogLevel.FATAL)
+                      if (options.LogLevel.ToUpper() == "TRACE")
                       {
-                          Console.WriteLine(e.Message);
+                          var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
+                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Trace));
                       }
-                  };
+                      else if (options.LogLevel.ToUpper() == "DEBUG")
+                      {
+                          var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
+                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Debug));
+                      }
+                      else if (options.LogLevel.ToUpper() == "INFO")
+                      {
+                          var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
+                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Info));
+                      }
+                      else if (options.LogLevel.ToUpper() == "WARN")
+                      {
+                          var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
+                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Warn));
+                      }
+                      else if (options.LogLevel.ToUpper() == "ERROR")
+                      {
+                          var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
+                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Error));
+                      }
+                      else if (options.LogLevel.ToUpper() == "FATAL")
+                      {
+                          var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
+                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Fatal));
+                      }
+                      else
+                      {
+                          Console.WriteLine($"Invalid log level {options.LogLevel}");
+                          Environment.Exit(-1);
+                      }
+                  }
+
+                  var configManager = new ConfigManager();
 
                   if (!File.Exists(options.ConfigFile))
                   {
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.FATAL, $"The supplied config file {options.ConfigFile} does not exist."));
+                      logger.Fatal($"The supplied config file {options.ConfigFile} does not exist.");
                       Environment.Exit(-1);
                   }
 
@@ -42,59 +79,58 @@
 
                   if (selectedConfig == null)
                   {
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.FATAL, $"The supplied project name {options.ConfigActionName} was not found in the config file {options.ConfigFile}."));
+                      logger.Fatal($"The supplied project name {options.ConfigActionName} was not found in the config file {options.ConfigFile}.");
                       Environment.Exit(-1);
                   }
 
                   if (string.IsNullOrWhiteSpace(configContainer.RepositoryRootDirectory))
                   {
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, "RepositoryRootDirectory was not set. Attempting to determine if we're in a repository"));
+                      logger.Debug($"RepositoryRootDirectory was not set. Attempting to determine if we're in a repository");
 
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"Config HgExecutablePath={configContainer.HgExecutablePath},Expanded={Environment.ExpandEnvironmentVariables(configContainer.HgExecutablePath)}"));
+                      logger.Debug($"Config HgExecutablePath={configContainer.HgExecutablePath},Expanded={Environment.ExpandEnvironmentVariables(configContainer.HgExecutablePath)}");
 
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"Config GitExecutablePath={configContainer.GitExecutablePath},Expanded={Environment.ExpandEnvironmentVariables(configContainer.GitExecutablePath)}"));
-
+                      logger.Debug($"Config GitExecutablePath={configContainer.GitExecutablePath},Expanded={Environment.ExpandEnvironmentVariables(configContainer.GitExecutablePath)}");
 
                       var hgRepositoryRoot = SourceControlHelper.GetHGRepositoryRootPath(Environment.ExpandEnvironmentVariables(configContainer.HgExecutablePath));
                       var gitRepositoryRoot = SourceControlHelper.GetGitRepositoryRootPath(Environment.ExpandEnvironmentVariables(configContainer.GitExecutablePath));
 
                       if (!string.IsNullOrWhiteSpace(hgRepositoryRoot))
                       {
-                          configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"We are in a Mercurial repository. Root = {hgRepositoryRoot}."));
+                          logger.Debug($"We are in a Mercurial repository. Root = {hgRepositoryRoot}.");
                           configContainer.RepositoryRootDirectory = hgRepositoryRoot;
                       }
                       else if (!string.IsNullOrWhiteSpace(gitRepositoryRoot))
                       {
-                          configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"We are in a Git repository. Root = {gitRepositoryRoot}."));
+                          logger.Debug($"We are in a Git repository. Root = {gitRepositoryRoot}.");
                           configContainer.RepositoryRootDirectory = gitRepositoryRoot;
                       }
                       else
                       {
-                          configManager.Log(null, new LogEventArgs(EnumLogLevel.FATAL, $"We are not in a repository and the RepositoryRootDirectory isn't set. We cannot function like this. Exiting."));
+                          logger.Debug($"We are not in a repository and the RepositoryRootDirectory isn't set. We cannot function like this. Exiting.");
                           Environment.Exit(-1);
                       }
                   }
                   else
                   {
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.DEBUG, $"Repository is set in config file. {configContainer.RepositoryRootDirectory}"));
+                      logger.Debug("$Repository is set in config file. {configContainer.RepositoryRootDirectory}");
                   }
 
-                  configManager.Log(null, new LogEventArgs(EnumLogLevel.INFO, $"Starting processing"));
+                  logger.Debug($"Starting processing");
                   foreach (var configItem in selectedConfig.ConfigItems)
                   {
-                      configManager.Log(null, new LogEventArgs(EnumLogLevel.INFO, $"Processing configItem Name={configItem.Name}, PackageName={configItem.PackageName}, RelativeDirectory={configItem.RelativeDirectory}, TargetFilename={configItem.TargetFilename},"));
+                      logger.Info($"Processing configItem Name={configItem.Name}, PackageName={configItem.PackageName}, RelativeDirectory={configItem.RelativeDirectory}, TargetFilename={configItem.TargetFilename}");
                       var package = configContainer.ConfigPackages.FirstOrDefault(x => x.Name.ToUpper() == configItem.PackageName.ToUpper());
 
                       if (package == null)
                       {
-                          configManager.Log(null, new LogEventArgs(EnumLogLevel.FATAL, $"The package {configItem.PackageName} is not a valid package name"));
+                          logger.Fatal($"The package {configItem.PackageName} is not a valid package name");
                           Environment.Exit(-1);
                       }
 
                       configManager.ProcessConfig(Path.Combine(configContainer.RepositoryRootDirectory, configItem.RelativeDirectory), configItem.TargetFilename, package);
                   }
 
-                  configManager.Log(null, new LogEventArgs(EnumLogLevel.INFO, $"Processing complete"));
+                 logger.Info($"Processing complete");
               })
               .WithNotParsed(errors => { });
         }

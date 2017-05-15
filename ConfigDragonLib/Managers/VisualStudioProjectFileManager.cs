@@ -4,6 +4,7 @@
     using System.IO;
     using System.Xml;
     using Logging;
+    using NLog;
 
     /// <summary>
     /// Handles making changed to Visual Studio csproj files.
@@ -11,10 +12,10 @@
     public class VisualStudioProjectFileManager
     {
         /// <summary>
-        /// Gets or sets the logging event handler
+        /// NLog logging class
         /// </summary>
-        public EventHandler<LogEventArgs> Log { get; set; }
-
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        
         /// <summary>
         /// Processes the specified file using the XPath selector and replaces the found element with the supplied value/
         /// </summary>
@@ -25,7 +26,7 @@
         {
             if (!File.Exists(filename))
             {
-                this?.Log(this, new LogEventArgs(EnumLogLevel.ERROR, $"The file { filename } was not found!"));
+                logger.Error($"The file { filename } was not found!");
                 return;
             }
 
@@ -48,11 +49,11 @@
             {
                 node.InnerText = value;
                 doc.Save(filename);
-                this?.Log(this, new LogEventArgs(EnumLogLevel.INFO, $"Selector {selector} processed"));
+                logger.Info($"Selector {selector} processed");
             }
             else
             {
-                this?.Log(this, new LogEventArgs(EnumLogLevel.WARN, $"The selector {selector} did not return any nodes"));
+                logger.Warn($"The selector {selector} did not return any nodes");
             }
         }
     }

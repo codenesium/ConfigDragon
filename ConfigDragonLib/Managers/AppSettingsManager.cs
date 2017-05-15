@@ -4,6 +4,7 @@
     using System.Configuration;
     using System.IO;
     using Logging;
+    using NLog;
 
     /// <summary>
     /// Class that handles application settings in .NET configuration files
@@ -11,9 +12,9 @@
     public class AppSettingsManager
     {
         /// <summary>
-        /// Gets or sets the logging event handler
+        /// NLog logging class
         /// </summary>
-        public EventHandler<LogEventArgs> Log { get; set; }
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Will create a setting if it does not exist
@@ -25,7 +26,7 @@
         {
             if (!File.Exists(filename))
             {
-                this?.Log(this, new LogEventArgs(EnumLogLevel.ERROR, $"The file { filename } was not found!"));
+                logger.Error($"The file { filename } was not found!");
                 return;
             }
 
@@ -37,11 +38,11 @@
                 config.AppSettings.Settings.Remove(key);
                 config.AppSettings.Settings.Add(key, value);
                 config.Save();
-                this?.Log(this, new LogEventArgs(EnumLogLevel.INFO, $"Key {key} processed"));
+                logger.Info($"Key {key} processed");
             }
             else
             {
-                this?.Log(this, new LogEventArgs(EnumLogLevel.WARN, $"Key {key} not found"));
+                logger.Warn($"Key {key} not found");
             }
         }
     }

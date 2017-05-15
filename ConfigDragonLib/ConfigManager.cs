@@ -4,6 +4,7 @@
     using System.IO;
     using Logging;
     using Newtonsoft.Json;
+    using NLog;
 
     /// <summary>
     /// Handles loading and processing on config objects
@@ -11,9 +12,9 @@
     public class ConfigManager
     {
         /// <summary>
-        /// Gets or sets the logging event handler
+        /// NLog logging class
         /// </summary>
-        public EventHandler<LogEventArgs> Log { get; set; }
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Loads the config container from the supplied file
@@ -37,10 +38,6 @@
             var appSettingsManager = new AppSettingsManager();
             var connectionStringManager = new ConnectionStringManager();
             var visualStudioProjectFileManagerManager = new VisualStudioProjectFileManager();
-
-            appSettingsManager.Log += this.Log;
-            connectionStringManager.Log += this.Log;
-            visualStudioProjectFileManagerManager.Log += this.Log;
 
             foreach (var key in config.AppSettings.Keys)
             {

@@ -7,9 +7,9 @@
       "Name": "Dev",
       "ConfigItems": [
         {
-          "Name": "nebula",
+          "Name": "test",
           "RelativeDirectory": "",
-          "TargetFilename": "nebulaapi.csproj",
+          "TargetFilename": "test.csproj",
           "PackageName": "Development"
         }
       ]
