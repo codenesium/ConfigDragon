@@ -31,7 +31,7 @@
                       if (options.LogLevel.ToUpper() == "TRACE")
                       {
                           var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
-                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Trace,LogLevel.Fatal));
+                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Trace, LogLevel.Fatal));
                       }
                       else if (options.LogLevel.ToUpper() == "DEBUG")
                       {
