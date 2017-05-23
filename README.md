@@ -2,7 +2,7 @@
 
 Config Dragon is a command line utility you can use to set up configuration files in .NET solutions. 
 
-#### Config Dragon will auto-detect your repository root for mercurial and GIT repositories if you have Source Tree installed. If you have another source control system you can set the location of the hg.exe or git.exe in the DragonConfig.json
+#### Config Dragon will auto-detect your repository root for mercurial and GIT repositories if you have Source Tree installed. If you have another source control system you can set the location of the hg.exe or git.exe in the ConfigDragon.json
 
 #### For other installs you will have to set RepositoryRootDirectory
 
