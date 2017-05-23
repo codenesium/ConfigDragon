@@ -3,13 +3,12 @@
     using System;
     using System.IO;
     using System.Xml;
-    using Logging;
     using NLog;
 
     /// <summary>
     /// Handles making changed to Visual Studio csproj files.
     /// </summary>
-    public class VisualStudioProjectFileManager
+    public class XmlFileManager
     {
         /// <summary>
         /// NLog logging class
@@ -20,9 +19,8 @@
         /// Processes the specified file using the XPath selector and replaces the found element with the supplied value/
         /// </summary>
         /// <param name="filename">file to modify</param>
-        /// <param name="selector">XPath selector to use</param>
-        /// <param name="value">Value to replace with</param>
-        public void Process(string filename, string selector, string value)
+        /// <param name="setting">XMl setting object</param>
+        public void Process(string filename, XmlSetting setting)
         {
             if (!File.Exists(filename))
             {
@@ -31,29 +29,31 @@
             }
 
             XmlDocument doc = new XmlDocument();
+
             doc.Load(filename);
-
-            /* It is required to add a namespace because the project node in a project file
-              has the "http://schemas.microsoft.com/developer/msbuild/2003" namespace. Without it
-              XPath does not work. There is a work around for XPAth 2.0 but it's not supported by .NET
-            */
-
-            var namespaceManager = new XmlNamespaceManager(doc.NameTable);
-            namespaceManager.AddNamespace("ns", "http://schemas.microsoft.com/developer/msbuild/2003");
 
             XmlNode root = doc.DocumentElement;
 
-            var node = root.SelectSingleNode(selector, namespaceManager);
+            var namespaceManager = new XmlNamespaceManager(doc.NameTable);
+
+            foreach (var key in setting.Namespaces.Keys)
+            {
+                logger.Trace($"Adding namespace {key} with value { setting.Namespaces[key]}");
+                namespaceManager.AddNamespace(key, setting.Namespaces[key]);
+            }
+
+            var node = root.SelectSingleNode(setting.Selector, namespaceManager);
 
             if (node != null)
             {
-                node.InnerText = value;
+                logger.Trace($"Selector returned node with value of {node.OuterXml}");
+                node.InnerText = setting.Value;
                 doc.Save(filename);
-                logger.Info($"Selector {selector} processed");
+                logger.Info($"Selector {setting.Selector} processed. Node value set to {setting.Value}");
             }
             else
             {
-                logger.Warn($"The selector {selector} did not return any nodes");
+                logger.Warn($"The selector {setting.Selector} did not return any nodes");
             }
         }
     }

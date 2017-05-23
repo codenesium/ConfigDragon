@@ -1,17 +1,14 @@
 # Config Dragon
 
 Config Dragon is a command line utility you can use to set up configuration files in .NET solutions. 
-It's similar to Slow Cheetah but I intend to add more complex feature that Slow Cheetah doesn't support.
 
 #### Config Dragon will auto-detect your repository root for mercurial and GIT repositories if you have Source Tree installed. If you have another source control system you can set the location of the hg.exe or git.exe in the DragonConfig.json
 
 #### For other installs you will have to set RepositoryRootDirectory
 
-#### Currently modification of application settings, connection strings, xml in visual studio project files are supported
-
+#### Modification of application settings, connection strings and XML files are supported
 
 ### Steps to use
-
 
 #### Install the nuget package
 
@@ -59,9 +56,23 @@ The default template looks like this.
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
       },
-      "VisualStudioProjectSettings": {
-        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
-      }
+     "XmlSettings": [
+        {
+          "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
+          "Value": "TRACE",
+          "Description": "Sets the nlog level",
+          "Namespaces": {
+            "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
+          },
+          {
+          "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
+          "Value": "http://localhost:8000",
+          "Description": "Sets the local IIS express url to localhost",
+          "Namespaces": {
+            "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          }
+        }
+      ]
     },
     {
       "Name": "ProductionPackage",
@@ -71,9 +82,23 @@ The default template looks like this.
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
       },
-      "VisualStudioProjectSettings": {
-        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
-      }
+      "XmlSettings": [
+        {
+          "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
+          "Value": "ERROR",
+          "Description": "Sets the nlog level",
+          "Namespaces": {
+            "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
+          },
+          {
+          "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
+          "Value": "http://localhost:8000",
+          "Description": "Sets the local IIS express url to localhost",
+          "Namespaces": {
+            "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          }
+        },
+      ]
     }
   ]
 }
@@ -82,7 +107,7 @@ The default template looks like this.
 Set up a configuration package that contains your connection string and app setting changes.
 
 ```javascript
- {
+   {
       "Name": "DevelopmentPackage",
       "AppSettings": {
         "YOUR_APP_SETTING_KEY": "YOUR_APP_SETTING_VALUE"
@@ -90,9 +115,23 @@ Set up a configuration package that contains your connection string and app sett
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
       },
-      "VisualStudioProjectSettings": {
-        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:50000"
-      }
+     "XmlSettings": [
+        {
+          "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
+          "Value": "TRACE",
+          "Description": "Sets the nlog level",
+          "Namespaces": {
+            "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
+          },
+          {
+          "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
+          "Value": "http://localhost:8000",
+          "Description": "Sets the local IIS express url to localhost",
+          "Namespaces": {
+            "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          }
+        }
+      ]
     }
 ```
 
@@ -119,5 +158,6 @@ To run the change call "ConfigDragon.bat dev" to apply the changes to your proje
 You can have multiple config items call the same package. A scenario where that is needed is a solution with
 multiple projects that need the same config change. 
 
-The Visual Studio project modification uses XPAth 1.0 to select the item you want to edit. Note that ns: is required to 
-namespace the selectors correctly. 
+XML changes use an XPath 1.0 selector to find the node to modify. An XML setting has a key/value set of
+namespaces that you can add if your XML uses namespaces. https://www.w3schools.com/xml/xpath_examples.asp has 
+a simple tutorial on how XPath works. 

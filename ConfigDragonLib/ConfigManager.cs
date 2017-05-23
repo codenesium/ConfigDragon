@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using Logging;
     using Newtonsoft.Json;
     using NLog;
 
@@ -37,21 +36,24 @@
         {
             var appSettingsManager = new AppSettingsManager();
             var connectionStringManager = new ConnectionStringManager();
-            var visualStudioProjectFileManagerManager = new VisualStudioProjectFileManager();
+            var xmlManager = new XmlFileManager();
 
             foreach (var key in config.AppSettings.Keys)
             {
+                logger.Trace($"Processing app setting key={key}");
                 appSettingsManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.AppSettings[key]);
             }
 
             foreach (var key in config.ConnectionStrings.Keys)
             {
+                logger.Trace($"Processing connection string key={key}");
                 connectionStringManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.ConnectionStrings[key]);
             }
 
-            foreach (var key in config.VisualStudioProjectSettings.Keys)
+            foreach (var setting in config.XmlSettings)
             {
-                visualStudioProjectFileManagerManager.Process(Path.Combine(configFileDirectory, relativeFileName), key, config.VisualStudioProjectSettings[key]);
+                logger.Trace($"Processing setting {setting.Description}");
+                xmlManager.Process(Path.Combine(configFileDirectory, relativeFileName), setting);
             }
         }      
     }

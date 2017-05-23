@@ -70,9 +70,7 @@
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="ConfigDragon.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="ConfigDragon.json" />
     <None Include="includes\ConfigDragon.bat" />
     <None Include="packages.config" />
     <None Include="includes\ConfigDragon.json" />

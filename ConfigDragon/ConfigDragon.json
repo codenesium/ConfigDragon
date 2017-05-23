@@ -8,8 +8,8 @@
       "ConfigItems": [
         {
           "Name": "test",
-          "RelativeDirectory": "",
-          "TargetFilename": "test.csproj",
+          "RelativeDirectory": "ConfigDragon",
+          "TargetFilename": "app.config",
           "PackageName": "Development"
         }
       ]
@@ -18,9 +18,25 @@
   "ConfigPackages": [
     {
       "Name": "Development",
-      "VisualStudioProjectSettings": {
-        "/ns:Project/ns:ProjectExtensions/ns:VisualStudio/ns:FlavorProperties/ns:WebProjectProperties/ns:IISUrl": "http://localhost:8000"
-      }
+      "XmlSettings": [
+        {
+          "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
+          "Value": "TRACE",
+          "Description": "Sets the nlog level",
+          "Namespaces": {
+            "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
+          }
+        },
+        {
+          "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
+          "Value": "http://localhost:8000",
+          "Description": "Sets the local IIS express url to localhost",
+          "Namespaces": {
+            "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          }
+
+        }
+      ]
     }
   ]
 }

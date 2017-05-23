@@ -5,7 +5,6 @@
     using System.Linq;
     using CommandLine;
     using ConfigDragonLib;
-    using ConfigDragonLib.Logging;
     using NLog;
 
     /// <summary>
@@ -32,27 +31,27 @@
                       if (options.LogLevel.ToUpper() == "TRACE")
                       {
                           var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
-                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Trace));
+                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Trace,LogLevel.Fatal));
                       }
                       else if (options.LogLevel.ToUpper() == "DEBUG")
                       {
                           var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
-                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Debug));
+                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Debug, LogLevel.Fatal));
                       }
                       else if (options.LogLevel.ToUpper() == "INFO")
                       {
                           var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
-                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Info));
+                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Info, LogLevel.Fatal));
                       }
                       else if (options.LogLevel.ToUpper() == "WARN")
                       {
                           var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
-                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Warn));
+                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Warn, LogLevel.Fatal));
                       }
                       else if (options.LogLevel.ToUpper() == "ERROR")
                       {
                           var loggers = NLog.LogManager.Configuration.LoggingRules.ToList();
-                          loggers.ForEach(x => x.EnableLoggingForLevel(LogLevel.Error));
+                          loggers.ForEach(x => x.EnableLoggingForLevels(LogLevel.Error, LogLevel.Fatal));
                       }
                       else if (options.LogLevel.ToUpper() == "FATAL")
                       {
