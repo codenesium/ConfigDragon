@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragon", "ConfigDrago
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragonLib", "ConfigDragonLib\ConfigDragonLib.csproj", "{2D25DB1C-B29A-4C25-89A8-BFF6982E02DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigDragonTests", "ConfigDragonTests\ConfigDragonTests.csproj", "{30BF420F-F77F-4FF0-BD96-F1E049BA4B8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D25DB1C-B29A-4C25-89A8-BFF6982E02DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D25DB1C-B29A-4C25-89A8-BFF6982E02DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D25DB1C-B29A-4C25-89A8-BFF6982E02DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30BF420F-F77F-4FF0-BD96-F1E049BA4B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30BF420F-F77F-4FF0-BD96-F1E049BA4B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30BF420F-F77F-4FF0-BD96-F1E049BA4B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30BF420F-F77F-4FF0-BD96-F1E049BA4B8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

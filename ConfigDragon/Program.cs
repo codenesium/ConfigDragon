@@ -73,7 +73,7 @@
                       Environment.Exit(-1);
                   }
 
-                  var configContainer = configManager.LoadConfig(options.ConfigFile);
+                  var configContainer = configManager.LoadConfigFromFile(options.ConfigFile);
                   var selectedConfig = configContainer.ConfigActions.FirstOrDefault(x => x.Name.ToUpper() == options.ConfigActionName.ToUpper());
 
                   if (selectedConfig == null)
@@ -126,7 +126,7 @@
                           Environment.Exit(-1);
                       }
 
-                      configManager.ProcessConfig(Path.Combine(configContainer.RepositoryRootDirectory, configItem.RelativeDirectory), configItem.TargetFilename, package);
+                      configManager.ProcessConfig(Path.Combine(configContainer.RepositoryRootDirectory, configItem.RelativeDirectory), configItem.TargetFilename, package, new FileSystem());
                   }
 
                  logger.Info($"Processing complete");
