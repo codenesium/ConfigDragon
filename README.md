@@ -181,7 +181,7 @@ a simple tutorial on how XPath works.
 
 
 String replacement works like you would expect. It looks for a string and replaces it with another string. This is 
-useful for setting variables in javascript files. The string must be escaped and be valid JSON to work work. 
+useful for setting variables in javascript files. The string must be escaped and be valid JSON to work. 
 
 
 ```javascript
