@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=2.0.275.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
-      <HintPath>../packages\CommandLineParser.2.1.1-beta\lib\net45\CommandLine.dll</HintPath>
+      <HintPath>..\packages\CommandLineParser.2.1.1-beta\lib\net45\CommandLine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -72,8 +72,8 @@
     </None>
     <None Include="ConfigDragon.json" />
     <None Include="includes\ConfigDragon.bat" />
-    <None Include="packages.config" />
     <None Include="includes\ConfigDragon.json" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigDragonLib\ConfigDragonLib.csproj">
