@@ -192,5 +192,6 @@ useful for setting variables in javascript files. The string must be escaped and
 	  "Description": "Replace a setting"
 	}
 ]
-'''
+```
+
 In this example we would search for value="123456" and replace it with value="test".
