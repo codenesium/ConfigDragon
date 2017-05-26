@@ -6,7 +6,7 @@ Config Dragon is a command line utility you can use to set up configuration file
 
 #### For other installs you will have to set RepositoryRootDirectory
 
-#### Modification of application settings, connection strings and XML files are supported
+#### Modification of application settings, connection strings, generic strings and XML files are supported
 
 ### Steps to use
 
@@ -100,6 +100,13 @@ The default template looks like this.
               "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
           }
         }
+      ],
+      "StringSettings": [
+        {
+          "Needle": "value=\"123456\"",
+          "ReplacementValue": "value=\"test\"",
+          "Description": "Replace a setting"
+        }
       ]
     }
   ]
@@ -134,6 +141,13 @@ Set up a configuration package that contains your connection string and app sett
           "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
         }
       }
+      ],
+      "StringSettings": [
+        {
+          "Needle": "value=\"123456\"",
+          "ReplacementValue": "value=\"test\"",
+          "Description": "Replace a setting"
+        }
       ]
     }
 ```
@@ -164,3 +178,19 @@ multiple projects that need the same config change.
 XML changes use an XPath 1.0 selector to find the node to modify. An XML setting has a key/value set of
 namespaces that you can add if your XML uses namespaces. https://www.w3schools.com/xml/xpath_examples.asp has 
 a simple tutorial on how XPath works. 
+
+
+String replacement works like you would expect. It looks for a string and replaces it with another string. This is 
+useful for setting variables in javascript files. The string must be escaped and be valid JSON to work work. 
+
+
+```javascript
+"StringSettings": [
+	{
+	  "Needle": "value=\"123456\"",
+	  "ReplacementValue": "value=\"test\"",
+	  "Description": "Replace a setting"
+	}
+]
+'''
+In this example we would search for value="123456" and replace it with value="test".

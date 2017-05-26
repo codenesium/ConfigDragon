@@ -35,23 +35,30 @@
       "ConnectionStrings": {
         "YOUR_CONNECTION_STRING_NAME": "YOUR_CONNECTION_STRING_VALUE"
       },
-     "XmlSettings": [
-      {
-        "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
-        "Value": "TRACE",
-        "Description": "Sets the nlog level",
-        "Namespaces": {
-          "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
-        }
-      },
+      "XmlSettings": [
         {
-        "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
-        "Value": "http://localhost:8000",
-        "Description": "Sets the local IIS express url to localhost",
-        "Namespaces": {
-          "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
+          "Value": "TRACE",
+          "Description": "Sets the nlog level",
+          "Namespaces": {
+            "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
+          }
+        },
+        {
+          "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
+          "Value": "http://localhost:8000",
+          "Description": "Sets the local IIS express url to localhost",
+          "Namespaces": {
+            "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          }
         }
-      }
+      ],
+      "StringSettings": [
+        {
+          "Needle": "value=\"123456\"",
+          "ReplacementValue": "value=\"test\"",
+          "Description": "Replace a setting"
+        }
       ]
     },
     {
@@ -64,20 +71,27 @@
       },
       "XmlSettings": [
         {
-            "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
-            "Value": "TRACE",
-            "Description": "Sets the nlog level",
-            "Namespaces": {
-              "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
-            }
-          },
-          {
-            "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
-            "Value": "http://localhost:8000",
-            "Description": "Sets the local IIS express url to localhost",
-            "Namespaces": {
-              "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          "Selector": "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/@minlevel",
+          "Value": "TRACE",
+          "Description": "Sets the nlog level",
+          "Namespaces": {
+            "nlog": "http://www.nlog-project.org/schemas/NLog.xsd"
           }
+        },
+        {
+          "Selector": "/vs:Project/vs:ProjectExtensions/vs:VisualStudio/vs:FlavorProperties/vs:WebProjectProperties/vs:IISUrl",
+          "Value": "http://localhost:8000",
+          "Description": "Sets the local IIS express url to localhost",
+          "Namespaces": {
+            "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
+          }
+        }
+      ],
+       "StringSettings": [
+        {
+          "Needle": "value=\"test\"",
+          "ReplacementValue": "value=\"\"",
+          "Description": "Replace a setting"
         }
       ]
     }

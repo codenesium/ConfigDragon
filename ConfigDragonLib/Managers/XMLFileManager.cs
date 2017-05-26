@@ -1,8 +1,7 @@
 ﻿namespace Codenesium.ConfigDragonLib
 {
-    using System;
-    using System.IO;
     using System.Xml;
+    using FluentAssertions;
     using NLog;
 
     /// <summary>
@@ -23,6 +22,9 @@
         /// <returns>Returns a process result for the current action</returns>
         public ProcessResult Process(string contents, XmlSetting setting)
         {
+            contents.Should().NotBeNullOrWhiteSpace();
+            setting.Should().NotBeNull();
+
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = true;
             doc.LoadXml(contents);

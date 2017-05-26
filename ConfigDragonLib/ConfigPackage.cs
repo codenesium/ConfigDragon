@@ -34,8 +34,13 @@
         public Dictionary<string, string> VisualStudioProjectSettings { get; private set; } = new Dictionary<string, string>();
 
         /// <summary>
-        /// Gets the dictionary of xml strings to modify. First ordinal is the selector. Second ordinal is the new value
+        /// Gets the list of xml strings to modify.
         /// </summary>
         public List<XmlSetting> XmlSettings { get; private set; } = new List<XmlSetting>();
+
+        /// <summary>
+        /// Gets the list of strings to modify. 
+        /// </summary>
+        public List<StringSetting> StringSettings { get; private set; } = new List<StringSetting>();
     }
 }

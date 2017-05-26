@@ -42,6 +42,13 @@
             "vs": "http://schemas.microsoft.com/developer/msbuild/2003"
           }
         }
+      ],
+      "StringSettings": [
+        {
+          "Needle": "value=\"123456\"",
+          "ReplacementValue": "test",
+          "Description": "Replace a setting"
+        }
       ]
     }
   ]

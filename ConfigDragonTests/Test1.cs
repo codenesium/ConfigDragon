@@ -98,5 +98,35 @@
             var result = manager.Process(testAppConfigFile, new XmlSetting("test", "/configuration/nlog:nlog/nlog:rules/nlog:logger[@writeTo='logfile']/invalid", "DEBUG", new Dictionary<string, string>() { { "nlog", "http://www.nlog-project.org/schemas/NLog.xsd" } }));
             result.Success.Should().BeFalse();
         }
+
+        /// <summary>
+        /// Tests that we're able to do a string replacement
+        /// </summary>
+        [Test]
+        public void StringManagerProcess()
+        {
+            string testConfigFile = File.ReadAllText(Path.Combine(TestContext.CurrentContext.TestDirectory, "TestFiles", "Config.json"));
+            string testAppConfigFile = File.ReadAllText(Path.Combine(TestContext.CurrentContext.TestDirectory, "TestFiles", "app.config"));
+
+            StringManager manager = new StringManager();
+            var result = manager.Process(testAppConfigFile, new StringSetting("Test string replacement", "value=\"123456\"", "value=\"999999\""));
+            result.Success.Should().BeTrue();
+            result.Content.Should().NotBeNullOrWhiteSpace();
+            result.Content.Should().Contain(@"value=""999999""");
+        }
+
+        /// <summary>
+        /// Tests that if we are unable to find the needle we fail
+        /// </summary>
+        [Test]
+        public void StringManagerProcess_needleNotFound()
+        {
+            string testConfigFile = File.ReadAllText(Path.Combine(TestContext.CurrentContext.TestDirectory, "TestFiles", "Config.json"));
+            string testAppConfigFile = File.ReadAllText(Path.Combine(TestContext.CurrentContext.TestDirectory, "TestFiles", "app.config"));
+
+            StringManager manager = new StringManager();
+            var result = manager.Process(testAppConfigFile, new StringSetting("Test string replacement", "value=\"a missing value\"", "value=\"999999\""));
+            result.Success.Should().BeFalse();
+        }
     }
 }

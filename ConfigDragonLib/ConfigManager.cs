@@ -45,6 +45,7 @@
         public void ProcessConfig(string configFileDirectory, string relativeFileName, ConfigPackage config, IFileSystem fileSystem)
         {
             var xmlManager = new XmlFileManager();
+            var stringManager = new StringManager();
 
             foreach (var key in config.AppSettings.Keys)
             {
@@ -75,6 +76,17 @@
                 string filename = Path.Combine(configFileDirectory, relativeFileName);
                 logger.Trace($"Processing setting {setting.Description}");
                 var result = xmlManager.Process(File.ReadAllText(filename), setting);
+                if (result.Success)
+                {
+                    fileSystem.WriteAllText(filename, result.Content);
+                }
+            }
+
+            foreach (var setting in config.StringSettings)
+            {
+                string filename = Path.Combine(configFileDirectory, relativeFileName);
+                logger.Trace($"Processing setting {setting.Description}");
+                var result = stringManager.Process(File.ReadAllText(filename), setting);
                 if (result.Success)
                 {
                     fileSystem.WriteAllText(filename, result.Content);
