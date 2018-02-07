@@ -2,10 +2,16 @@
 {
     using CommandLine;
 
+    [Verb("spec", HelpText = "Generate config file")]
+    internal class SpecOptions
+    {
+       
+    }
     /// <summary>
     /// The command line options class
     /// </summary>
-    internal class Options
+    [Verb("run", HelpText = "Run config file transforms")]
+    internal class RunOptions
     {
         /// <summary>
         /// Gets or sets the complete path to the config file

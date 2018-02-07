@@ -10,17 +10,17 @@
         /// <summary>
         /// Gets or sets the RepositoryRootDirectory
         /// </summary>
-        public string RepositoryRootDirectory { get; set; }
+        public string RepositoryRootDirectory { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the HgExecutablePath. Hg.exe
         /// </summary>
-        public string HgExecutablePath { get; set; }
+        public string HgExecutablePath { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the GitExecutablePath. 'GIT.exe'
         /// </summary>
-        public string GitExecutablePath { get; set; }
+        public string GitExecutablePath { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the list of config actions
