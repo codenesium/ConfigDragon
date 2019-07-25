@@ -12,7 +12,7 @@ Config Dragon is a command line utility you can use to set up configuration file
 
 #### Install the nuget package
 
-Install-Package Codenesium.ConfigDragon
+[![NuGet Badge](https://buildstats.info/nuget/Codenesium.ConfigDragon)](https://www.nuget.org/packages/Codenesium.ConfigDragon/)
 
 There will be a ConfigDragon.bat and a ConfigDragon.json added to your project.
 
